@@ -1,6 +1,8 @@
 var lastUpdate = 0;
 var player, ball, opponent, ai;
+
 // The amount to move the player each step.
+
 var distance = 24;
 var score  = [0, 0];
 
@@ -11,8 +13,10 @@ var Ball = function () {
   var owner;
   var halfTile = 32;
   var paused = false;
+
     // If there is an owner, move the ball to match the owner's position.
-	function move(t) {
+
+  function move(t) {
 		if (owner !== undefined) {
       var ownerPosition = owner.getPosition();
 			position[1] = ownerPosition[1] + owner.getSize() / 2;
@@ -21,10 +25,14 @@ var Ball = function () {
     } else {
         position[0] = ownerPosition[0];
       }
+	
 		    // Otherwise, move the ball using physics. Note the horizontal bouncing has been removed -- ball should pass by a player if it isn't caught.
+		
 		} else {
+		    
 		    // If the ball hits the top or bottom, reverse the vertical speed.
-			if (position[1] - halfTile <= 0 ||
+			
+		    if (position[1] - halfTile <= 0 ||
 				  position[1] + halfTile >= innerHeight) {
 				velocity[1] = -velocity[1];
 			}
@@ -34,19 +42,22 @@ var Ball = function () {
 
 		element.css('left', (position[0] - halfTile) + 'px');
 		element.css('top', (position[1] - halfTile) + 'px');
-	};
+  };
+
     //keeping score
   
     function checkScored() {
 		if (position[0] <= 0) {
       pause();
-      // Opponent scored!
+    
+		    // Opponent scored!
 			$(document).trigger('ping:opponentScored');
 		}
 
 		if (position[0] >= innerWidth) {
       pause();
-      // Player scored!
+
+		    // Player scored!
 			$(document).trigger('ping:playerScored');
 		}
 	}
@@ -102,6 +113,7 @@ var Ball = function () {
     getPosition:  function(p) { return position; },
   }
 };
+
 //player movement - creating a moveable player
 var Player = function (elementName, side)
 {
@@ -171,7 +183,9 @@ var Player = function (elementName, side)
     ball.setOwner(undefined);
   }
   //Currently, there’s no way to get the position of a Player object, so I’ll add the getPosition and getSide accessors to the Player object:
-  return {
+  return 
+  {
+
   // Ball definition code goes here
     move: move,
     fire: fire,
@@ -182,6 +196,8 @@ var Player = function (elementName, side)
   }
 };
 
+//adding AI Player to the game 
+
 function AI(playerToControl) {
   var ctl = playerToControl;
   var State = {
@@ -191,6 +207,7 @@ function AI(playerToControl) {
   }
   var currentState = State.FOLLOWING;
 
+    //Adding the aimAndFire function to the AIMING case statement makes a fully functional AI against which to play.
   function repeat(cb, cbFinal, interval, count) {
     var timeout = function() {
       repeat(cb, cbFinal, interval, count-1);
@@ -239,7 +256,7 @@ function AI(playerToControl) {
       currentState = State.FOLLOWING;
     }, 400);
   }
-
+    //update function I can call in requestAnimationFrame to have the AI act according to its state:
   function update() {
     switch (currentState) {
       case State.FOLLOWING:
@@ -247,8 +264,8 @@ function AI(playerToControl) {
           currentState = State.AIMING;
 					aimAndFire();
         } else {
-					moveTowardsBall();
-        	currentState = State.WAITING;
+				    moveTowardsBall();
+                  	currentState = State.WAITING;
 				}
       case State.WAITING:
         break;
@@ -261,7 +278,7 @@ function AI(playerToControl) {
     update: update
   }
 }
-
+//The AI alternates between having to follow the ball and wait a split second this makes it more human like
 function update(time) {
   var t = time - lastUpdate;
   lastUpdate = time;
@@ -273,7 +290,8 @@ function update(time) {
 }
 
 $(document).ready(function() {
-  lastUpdate = 0;
+    lastUpdate = 0;
+
 //creating two player and have them move
   player = Player('player', 'left');
   player.move(0);
@@ -282,21 +300,20 @@ $(document).ready(function() {
   ball = Ball();
   ai = AI(opponent);
   ball.setOwner(player);
- // pointerdown is the universal event for all types of pointers -- a finger,
- // a mouse, a stylus and so on.
+ 
+    // pointerdown is the universal event for all types of pointers -- a finger, a mouse, a stylus and so on.
 	
   $('#up')    .bind("pointerdown", function() {player.move(-distance);});
   $('#down').bind("pointerdown", function () { player.move(distance); });
   ouch support on all controls. 
 
-//controls on the right change the aim of the player. 
-//touching anywhere on the screen fires the ball:
+//controls on the right change the aim of the player. touching anywhere on the screen fires the ball:
 
   $('#left')  .bind("pointerdown", function() {player.setAim(-1);});
   $('#right') .bind("pointerdown", function() {player.setAim(1);});
   $('#left')  .bind("pointerup",   function() {player.setAim(0);});
   $('#right') .bind("pointerup",   function() {player.setAim(0);});
-  $('body') .bind("pointerup"), function() {player.fire();));
+  $('body') .bind("pointerdown"), function() {player.fire();});
   }
   requestAnimationFrame(update);
 });
