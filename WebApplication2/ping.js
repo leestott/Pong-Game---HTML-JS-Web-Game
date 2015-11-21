@@ -1,5 +1,6 @@
 var lastUpdate = 0;
 var player, ball, opponent, ai;
+// The amount to move the player each step.
 var distance = 24;
 var score  = [0, 0];
 
@@ -10,17 +11,19 @@ var Ball = function () {
   var owner;
   var halfTile = 32;
   var paused = false;
-
+    // If there is an owner, move the ball to match the owner's position.
 	function move(t) {
 		if (owner !== undefined) {
       var ownerPosition = owner.getPosition();
 			position[1] = ownerPosition[1] + owner.getSize() / 2;
       if (owner.getSide() === 'left') {
         position[0] = ownerPosition[0] + owner.getSize();
-      } else {
+    } else {
         position[0] = ownerPosition[0];
       }
+		    // Otherwise, move the ball using physics. Note the horizontal bouncing has been removed -- ball should pass by a player if it isn't caught.
 		} else {
+		    // If the ball hits the top or bottom, reverse the vertical speed.
 			if (position[1] - halfTile <= 0 ||
 				  position[1] + halfTile >= innerHeight) {
 				velocity[1] = -velocity[1];
@@ -99,38 +102,46 @@ var Ball = function () {
   }
 };
 //player movement - creating a moveable player
-var Player = function (elementName, side) {
-  var position = [0,0];
+var Player = function (elementName, side)
+{
+    var position = [0, 0];
+ 
+    //support for aiming
   var aim = 0;
   var tileSize = 128;
 
-  var element = $('#'+elementName);
+  var element = $('#' + elementName);
+
+  //stopping player
 
   var move = function(y) {
-    position[1] += y;
+      //Adjust the player's position.
+      position[1] += y;
+      // if the player is off the edge of the screen, move it back
     if (position[1] <= 0)  {
       position[1] = 0;
     }
-
+      //the height of the player is 128 pixel so stop it before it goes of the edge
     if (position[1] >= innerHeight - tileSize) {
       position[1] = innerHeight - tileSize;
     }
-
+      // If the player is meant to stick to the right side, set the player position to the right edge of the screen.
     if (side == 'right') {
       position[0] = innerWidth - tileSize;
     }
-
+      // Finally, update the player's position on the page.
     element.css('left', position[0] + 'px'); 
     element.css('top', position[1] + 'px'); 
   }
-
-  var fire = function() {
+    //fire function
+  var fire = function () {
+      // Safety check: if the ball doesn't have an owner, don't not mess with it.
     if (ball.getOwner() !== this) {
       return;
     }
 
     var v = [0,0];
-
+    //The ball should move at the same speed, regardless of direction 
     if (side == 'left') {
       switch(aim) {
       case -1:
@@ -155,10 +166,12 @@ var Player = function (elementName, side) {
       }
     }
     ball.setVelocity(v);
+      //release control of the ball
     ball.setOwner(undefined);
   }
-
+  //Currently, there’s no way to get the position of a Player object, so I’ll add the getPosition and getSide accessors to the Player object:
   return {
+  // Ball definition code goes here
     move: move,
     fire: fire,
     getSide:      function()  { return side; },
@@ -260,13 +273,16 @@ function update(time) {
 
 $(document).ready(function() {
   lastUpdate = 0;
+//creating two player and have them move
   player = Player('player', 'left');
   player.move(0);
   opponent = Player('opponent', 'right');
   opponent.move(0);
   ball = Ball();
   ai = AI(opponent);
-	ball.setOwner(player);
+  ball.setOwner(player);
+ // pointerdown is the universal event for all types of pointers -- a finger,
+ // a mouse, a stylus and so on.
 	
   $('#up')    .bind("pointerdown", function() {player.move(-distance);});
   $('#down')  .bind("pointerdown", function() {player.move(distance);});
@@ -278,8 +294,13 @@ $(document).ready(function() {
   requestAnimationFrame(update);
 });
 
-$(document).keydown(function(event) {
-  var event = event || window.event;
+$(document).keydown(function (event)
+{
+    var event = event || window.event;
+// This code converts the keyCode (a number) from the event to an uppercase
+// letter to make the switch statement easier to read.
+
+
   switch(String.fromCharCode(event.keyCode).toUpperCase()) {
     case 'A':
       player.move(-distance);
