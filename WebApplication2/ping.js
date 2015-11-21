@@ -137,7 +137,7 @@ var Player = function (elementName, side) {
         }
 
         var v = [0, 0];
-
+        //the ball should move at the same speed regardless of direction
         if (side == 'left') {
             switch (aim) {
                 case -1:
@@ -162,9 +162,10 @@ var Player = function (elementName, side) {
             }
         }
         ball.setVelocity(v);
+        //release control of the ball
         ball.setOwner(undefined);
     }
-
+    //getting the position of the player 
     return {
         move: move,
         fire: fire,
@@ -174,7 +175,7 @@ var Player = function (elementName, side) {
         getSize: function () { return tileSize; }
     }
 };
-
+//adding AI to the game
 function AI(playerToControl) {
     var ctl = playerToControl;
     var State = {
@@ -183,7 +184,7 @@ function AI(playerToControl) {
         AIMING: 2
     }
     var currentState = State.FOLLOWING;
-
+    //adding function to AI AimFire Aimining RadomAimFire
     function repeat(cb, cbFinal, interval, count) {
         var timeout = function () {
             repeat(cb, cbFinal, interval, count - 1);
@@ -232,7 +233,7 @@ function AI(playerToControl) {
             currentState = State.FOLLOWING;
         }, 400);
     }
-
+    //Update AI function so it acts according to its state
     function update() {
         switch (currentState) {
             case State.FOLLOWING:
@@ -255,6 +256,7 @@ function AI(playerToControl) {
     }
 }
 
+//The AI alernates between following the ball catching the ball and waiting a few secs to make it more human like
 function update(time) {
     var t = time - lastUpdate;
     lastUpdate = time;
@@ -267,6 +269,7 @@ function update(time) {
 
 $(document).ready(function () {
     lastUpdate = 0;
+    //creating two players haave them move
     player = Player('player', 'left');
     player.move(0);
     opponent = Player('opponent', 'right');
@@ -274,6 +277,8 @@ $(document).ready(function () {
     ball = Ball();
     ai = AI(opponent);
     ball.setOwner(player);
+    //pointerdown is the universal event for all pointer -- a finger mouse stylus etc
+    //set players aim and fire function
 
     $('#up').bind("pointerdown", function () { player.move(-distance); });
     $('#down').bind("pointerdown", function () { player.move(distance); });
@@ -281,12 +286,13 @@ $(document).ready(function () {
     $('#right').bind("pointerdown", function () { player.setAim(1); });
     $('#left').bind("pointerup", function () { player.setAim(0); });
     $('#right').bind("pointerup", function () { player.setAim(0); });
-
+    $('#body').bind("pointerdown", function () { player.fire(); });
     requestAnimationFrame(update);
 });
 
 $(document).keydown(function (event) {
     var event = event || window.event;
+    //this converts all the keycode events to uppercase to make them easier to read
     switch (String.fromCharCode(event.keyCode).toUpperCase()) {
         case 'A':
             player.move(-distance);
@@ -319,6 +325,8 @@ $(document).keyup(function (event) {
 
     return false;
 });
+
+//add score to scoreboard
 
 $(document).on('ping:playerScored', function (e) {
     console.log('player scored!');
