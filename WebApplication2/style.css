@@ -25,6 +25,7 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  touch-action:none;
 }
 
 h1 { 
@@ -65,8 +66,7 @@ h1 {
 #player {
   position: absolute;
   background-position: 0px 128px;
-   touch-action:none;
-
+  touch-action:none;
 }
 
 #opponent {
@@ -79,7 +79,6 @@ h1 {
   width: 64px;
   height: 64px;
   background-position: 128px 128px;
-   touch-action:none;
   }
 
 #right {
