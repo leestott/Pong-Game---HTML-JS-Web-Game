@@ -287,7 +287,8 @@ $(document).ready(function () {
     $('#right').bind("pointerdown", function () { player.setAim(1); });
     $('#left').bind("pointerup", function () { player.setAim(0); });
     $('#right').bind("pointerup", function () { player.setAim(0); });
-    $('#body').bind("pointerdown", function () { player.fire(); });
+    $('#player').bind("pointerdown", function () { player.fire(0); });
+    $('#player').bind("pointerup", function () { player.fire(1); });
     requestAnimationFrame(update);
 });
 
