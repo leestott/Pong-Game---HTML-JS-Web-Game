@@ -1,0 +1,85 @@
+@font-face {
+  font-family: 'PressStart2P';
+  src: url('PressStart2P.woff');
+}
+
+html, body {
+  height: 100%;
+  margin: 0px;
+}
+
+#arena {
+  background-image: url("arena.png");
+  background-size: 100% 100%;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+h1 { 
+	font-family: 'PressStart2P', 'Georgia', serif; 
+}
+
+#score {
+  position: absolute;
+  z-index: 1000;
+  left: 50%;
+  top: 5%;
+  transform: translate(-50%, 0%);
+}
+
+.sprite {
+  background-image: url("sprites.png");
+  width: 128px;
+  height: 128px;
+}
+
+.control {
+  margin: 16px;
+  width: 64px;
+  height: 64px;
+}
+
+#controls-left {
+  position: absolute;
+  left: 0; bottom: 0;
+}
+
+#controls-right {
+  position: absolute;
+  right: 0; bottom: 0;
+}
+
+#player {
+  position: absolute;
+  background-position: 0px 128px;
+}
+
+#opponent {
+  position: absolute;
+  background-position: 0px 0px;
+}
+
+#ball {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  background-position: 128px 128px;
+}
+
+#right {
+  background-position: 64px 192px;
+}
+
+#left {
+  background-position: 64px 0px;
+}
+
+#down {
+  background-position: 128px 192px;
+}
+
+#up {
+  background-position: 128px 0px;
+}
