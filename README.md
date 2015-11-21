@@ -2,7 +2,7 @@
 
 Building your first Web Based HTML5/JavaScript game Tutorial, this is a base project which allows additional features to be added its intended as a getting started tutorial.
 
-Full Tutorial at http://blogs.msdn.com/uk_faculty_connection
+Full Tutorial at http://blogs.msdn.com/b/uk_faculty_connection/archive/2015/11/21/building-a-web-based-game-and-hosting-it-on-an-azure-dreamspark-subscription.aspx
 
 Aimed at inspiring new developer building and using Microsoft Azure FREE Web Apps
 
