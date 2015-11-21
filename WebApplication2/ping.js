@@ -270,7 +270,7 @@ function update(time) {
 
 $(document).ready(function () {
     lastUpdate = 0;
-    //creating two players haave them move
+    //creating two players have them both move
     player = Player('player', 'left');
     player.move(0);
     opponent = Player('opponent', 'right');
