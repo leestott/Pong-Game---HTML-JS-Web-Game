@@ -6,6 +6,7 @@
 html, body {
   height: 100%;
   margin: 0px;
+  touch-action:none;
 }
 
 #plainCanvas {
@@ -35,34 +36,37 @@ h1 {
   z-index: 1000;
   left: 50%;
   top: 5%;
-  transform: translate(-50%, 0%);
 }
 
 .sprite {
   background-image: url("sprites.png");
   width: 128px;
   height: 128px;
-}
+ }
 
 .control {
   margin: 16px;
   width: 64px;
   height: 64px;
-}
+ }
 
 #controls-left {
   position: absolute;
   left: 0; bottom: 0;
+  touch-action:none;
 }
 
 #controls-right {
   position: absolute;
   right: 0; bottom: 0;
+  touch-action:none;
 }
 
 #player {
   position: absolute;
   background-position: 0px 128px;
+   touch-action:none;
+
 }
 
 #opponent {
@@ -75,20 +79,25 @@ h1 {
   width: 64px;
   height: 64px;
   background-position: 128px 128px;
-}
+   touch-action:none;
+  }
 
 #right {
   background-position: 64px 192px;
+  touch-action:none;
 }
 
 #left {
   background-position: 64px 0px;
+  touch-action:none;
 }
 
 #down {
   background-position: 128px 192px;
+  touch-action:none;
 }
 
 #up {
   background-position: 128px 0px;
+  touch-action:none;
 }
