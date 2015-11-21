@@ -8,6 +8,15 @@ html, body {
   margin: 0px;
 }
 
+#plainCanvas {
+    position:absolute;
+    left:10%;
+    top:10%;
+    width:80%;
+    height:80%;
+    touch-action:none;
+}
+
 #arena {
   background-image: url("arena.png");
   background-size: 100% 100%;

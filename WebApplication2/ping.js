@@ -1,5 +1,6 @@
 var lastUpdate = 0;
 var player, ball, opponent, ai;
+
 //the amount to move the players each step 
 var distance = 24;
 var score = [0, 0];
