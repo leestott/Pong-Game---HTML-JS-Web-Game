@@ -35,6 +35,7 @@ var Ball = function () {
 		element.css('left', (position[0] - halfTile) + 'px');
 		element.css('top', (position[1] - halfTile) + 'px');
 	};
+    //keeping score
   
     function checkScored() {
 		if (position[0] <= 0) {
@@ -285,15 +286,22 @@ $(document).ready(function() {
  // a mouse, a stylus and so on.
 	
   $('#up')    .bind("pointerdown", function() {player.move(-distance);});
-  $('#down')  .bind("pointerdown", function() {player.move(distance);});
+  $('#down').bind("pointerdown", function () { player.move(distance); });
+  ouch support on all controls. 
+
+//controls on the right change the aim of the player. 
+//touching anywhere on the screen fires the ball:
+
   $('#left')  .bind("pointerdown", function() {player.setAim(-1);});
   $('#right') .bind("pointerdown", function() {player.setAim(1);});
   $('#left')  .bind("pointerup",   function() {player.setAim(0);});
   $('#right') .bind("pointerup",   function() {player.setAim(0);});
-
+  $('body') .bind("pointerup"), function() {player.fire();));
+  }
   requestAnimationFrame(update);
 });
 
+//set the player’s aim and fire functions. 
 $(document).keydown(function (event)
 {
     var event = event || window.event;
