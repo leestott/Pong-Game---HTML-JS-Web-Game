@@ -1,6 +1,6 @@
-# Pong HTML5/GS Game
+# Pong HTML5/JavaScript Game - Getting Started Tutorial
 
-Building your first Web Based HTML5/JavaScript game
+Building your first Web Based HTML5/JavaScript game Tutorial, this is a base project which allows additional features to be added its intended as a getting started tutorial.
 
 Full Tutorial at http://blogs.msdn.com/uk_faculty_connection
 
