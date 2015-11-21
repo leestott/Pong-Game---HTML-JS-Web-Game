@@ -287,14 +287,14 @@ $(document).ready(function () {
     $('#right').bind("pointerdown", function () { player.setAim(1); });
     $('#left').bind("pointerup", function () { player.setAim(0); });
     $('#right').bind("pointerup", function () { player.setAim(0); });
-    $('#player').bind("pointerdown", function () { player.fire(0); });
-    $('#player').bind("pointerup", function () { player.fire(1); });
-    requestAnimationFrame(update);
+    $('#player').bind("pointerdown", function () { player.fire(); });
+       requestAnimationFrame(update);
 });
 
 $(document).keydown(function (event) {
     var event = event || window.event;
     //this converts all the keycode events to uppercase to make them easier to read
+    //these are the keyboard controls form the game A - Z and Space
     switch (String.fromCharCode(event.keyCode).toUpperCase()) {
         case 'A':
             player.move(-distance);
