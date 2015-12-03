@@ -17,7 +17,7 @@ var Ball = function () {
         if (owner !== undefined) {
             var ownerPosition = owner.getPosition();
             position[1] = ownerPosition[1] + owner.getSize() / 2;
-            if (owner.getSide() === 'shootUp') {
+            if (owner.getSide() === 'left') {
                 position[0] = ownerPosition[0] + owner.getSize();
             } else {
                 position[0] = ownerPosition[0];
@@ -33,8 +33,8 @@ var Ball = function () {
             position[1] += velocity[1] * t;
         }
 
-        element.css('shootUp', (position[0] - halfTile) + 'px');
-        element.css('moveUp', (position[1] - halfTile) + 'px');
+        element.css('left', (position[0] - halfTile) + 'px');
+        element.css('top', (position[1] - halfTile) + 'px');
     };
 
     function checkScored() {
@@ -123,12 +123,12 @@ var Player = function (elementName, side) {
             position[1] = innerHeight - tileSize;
         }
         //if the player is meant to stick to the right side set the player position 
-        if (side == 'shootDown') {
+        if (side == 'right') {
             position[0] = innerWidth - tileSize;
         }
         //finally update the players position on the page
-        element.css('shootUp', position[0] + 'px');
-        element.css('moveUp', position[1] + 'px');
+        element.css('left', position[0] + 'px');
+        element.css('top', position[1] + 'px');
     }
     //fire function
     var fire = function () {
@@ -139,7 +139,7 @@ var Player = function (elementName, side) {
 
         var v = [0, 0];
         //the ball should move at the same speed regardless of direction
-        if (side == 'shootUp') {
+        if (side == 'left') {
             switch (aim) {
                 case -1:
                     v = [.707, -.707];
@@ -271,9 +271,9 @@ function update(time) {
 $(document).ready(function () {
     lastUpdate = 0;
     //creating two players have them both move
-    player = Player('player', 'shootUp');
+    player = Player('player', 'left');
     player.move(0);
-    opponent = Player('opponent', 'shootDown');
+    opponent = Player('opponent', 'right');
     opponent.move(0);
     ball = Ball();
     ai = AI(opponent);
