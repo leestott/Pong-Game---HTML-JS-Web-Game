@@ -40,7 +40,7 @@ h1 {
 }
 
 .sprite {
-    background-image: url('../assets/sprites-football.png');
+    background-image: url('../assets/sprites.png');
     width: 128px;
     height: 128px;
 }
