@@ -66,8 +66,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="js\jquery-2.1.4.min.js" />
     <Content Include="packages.config" />
-    <Content Include="PressStart2P.woff" />
+    <Content Include="assets\PressStart2P.woff" />
     <None Include="Properties\PublishProfiles\pong-test.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -77,12 +78,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="arena.png" />
-    <Content Include="hand.js" />
+    <Content Include="assets\arena.png" />
+    <Content Include="js\hand.js" />
     <Content Include="index.html" />
-    <Content Include="ping.js" />
-    <Content Include="sprites.png" />
-    <Content Include="style.css" />
+    <Content Include="js\pong.js" />
+    <Content Include="assets\sprites.png" />
+    <Content Include="css\style.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

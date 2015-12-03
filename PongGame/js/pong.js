@@ -17,7 +17,7 @@ var Ball = function () {
         if (owner !== undefined) {
             var ownerPosition = owner.getPosition();
             position[1] = ownerPosition[1] + owner.getSize() / 2;
-            if (owner.getSide() === 'left') {
+            if (owner.getSide() === 'shootUp') {
                 position[0] = ownerPosition[0] + owner.getSize();
             } else {
                 position[0] = ownerPosition[0];
@@ -33,21 +33,21 @@ var Ball = function () {
             position[1] += velocity[1] * t;
         }
 
-        element.css('left', (position[0] - halfTile) + 'px');
-        element.css('top', (position[1] - halfTile) + 'px');
+        element.css('shootUp', (position[0] - halfTile) + 'px');
+        element.css('moveUp', (position[1] - halfTile) + 'px');
     };
 
     function checkScored() {
         if (position[0] <= 0) {
             pause();
             // Opponent scored!
-            $(document).trigger('ping:opponentScored');
+            $(document).trigger('pong:opponentScored');
         }
 
         if (position[0] >= innerWidth) {
             pause();
             // Player scored!
-            $(document).trigger('ping:playerScored');
+            $(document).trigger('pong:playerScored');
         }
     }
 
@@ -123,12 +123,12 @@ var Player = function (elementName, side) {
             position[1] = innerHeight - tileSize;
         }
         //if the player is meant to stick to the right side set the player position 
-        if (side == 'right') {
+        if (side == 'shootDown') {
             position[0] = innerWidth - tileSize;
         }
         //finally update the players position on the page
-        element.css('left', position[0] + 'px');
-        element.css('top', position[1] + 'px');
+        element.css('shootUp', position[0] + 'px');
+        element.css('moveUp', position[1] + 'px');
     }
     //fire function
     var fire = function () {
@@ -139,7 +139,7 @@ var Player = function (elementName, side) {
 
         var v = [0, 0];
         //the ball should move at the same speed regardless of direction
-        if (side == 'left') {
+        if (side == 'shootUp') {
             switch (aim) {
                 case -1:
                     v = [.707, -.707];
@@ -271,9 +271,9 @@ function update(time) {
 $(document).ready(function () {
     lastUpdate = 0;
     //creating two players have them both move
-    player = Player('player', 'left');
+    player = Player('player', 'shootUp');
     player.move(0);
-    opponent = Player('opponent', 'right');
+    opponent = Player('opponent', 'shootDown');
     opponent.move(0);
     ball = Ball();
     ai = AI(opponent);
@@ -281,12 +281,12 @@ $(document).ready(function () {
     //pointerdown is the universal event for all pointer -- a finger mouse stylus etc
     //set players aim and fire function
 
-    $('#up').bind("pointerdown", function () { player.move(-distance); });
-    $('#down').bind("pointerdown", function () { player.move(distance); });
-    $('#left').bind("pointerdown", function () { player.setAim(-1); });
-    $('#right').bind("pointerdown", function () { player.setAim(1); });
-    $('#left').bind("pointerup", function () { player.setAim(0); });
-    $('#right').bind("pointerup", function () { player.setAim(0); });
+    $('#moveUp').bind("pointerdown", function () { player.move(-distance); });
+    $('#moveDown').bind("pointerdown", function () { player.move(distance); });
+    $('#shootUp').bind("pointerdown", function () { player.setAim(-1); });
+    $('#shootDown').bind("pointerdown", function () { player.setAim(1); });
+    $('#shootUp').bind("pointerup", function () { player.setAim(0); });
+    $('#shootDown').bind("pointerup", function () { player.setAim(0); });
     $('#player').bind("pointerdown", function () { player.fire(); });
        requestAnimationFrame(update);
 });
@@ -330,7 +330,7 @@ $(document).keyup(function (event) {
 
 //add score to scoreboard
 
-$(document).on('ping:playerScored', function (e) {
+$(document).on('pong:playerScored', function (e) {
     console.log('player scored!');
     score[0]++;
     $('#playerScore').text(score[0]);
@@ -338,7 +338,7 @@ $(document).on('ping:playerScored', function (e) {
     ball.start();
 });
 
-$(document).on('ping:opponentScored', function (e) {
+$(document).on('pong:opponentScored', function (e) {
     console.log('opponent scored!');
     score[1]++;
     $('#opponentScore').text(score[1]);

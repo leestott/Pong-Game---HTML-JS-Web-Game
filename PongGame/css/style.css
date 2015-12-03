@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'PressStart2P';
-  src: url('PressStart2P.woff');
+    font-family: 'PressStart2P';
+    src: url('../assets/PressStart2P.woff') format('woff');
 }
 
 html, body {
