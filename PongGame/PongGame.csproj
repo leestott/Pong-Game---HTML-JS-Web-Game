@@ -66,11 +66,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\arena.png" />
-    <Content Include="assets\sprites.png" />
+    <Content Include="assets\arena-football.png" />
+    <Content Include="assets\arena-tennis.jpg" />
+    <Content Include="assets\sprites-football.png" />
+    <Content Include="assets\sprites-tennis.png" />
     <Content Include="css\style.css" />
     <Content Include="index.html" />
-    <Content Include="js\hand.js" />
     <Content Include="js\jquery-2.1.4.min.js" />
     <Content Include="js\pong.js" />
     <Content Include="packages.config" />

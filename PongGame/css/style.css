@@ -19,7 +19,7 @@ html, body {
 }
 
 #arena {
-    background-image: url('../assets/arena.png');
+    background-image: url('../assets/arena-football.png');
     background-size: 100% 100%;
     margin: 0px;
     width: 100%;
@@ -40,7 +40,7 @@ h1 {
 }
 
 .sprite {
-    background-image: url('../assets/sprites.png');
+    background-image: url('../assets/sprites-football.png');
     width: 128px;
     height: 128px;
 }
