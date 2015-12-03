@@ -40,7 +40,7 @@ h1 {
 }
 
 .sprite {
-    background-image: url('../assets/sprites.png');
+    background-image: url('../assets/sprites-football.png');
     width: 128px;
     height: 128px;
 }
@@ -81,12 +81,12 @@ h1 {
   background-position: 128px 128px;
   }
 
-#shootDown {
+#aimDown {
   background-position: 64px 192px;
   touch-action:none;
 }
 
-#shootUp {
+#aimUp {
   background-position: 64px 0px;
   touch-action:none;
 }
