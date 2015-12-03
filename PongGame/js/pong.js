@@ -213,7 +213,7 @@ function AI(playerToControl) {
                 ctl.move(distance);
             }
         }
-        // COMMENT OUT ABOVE ***************************************************************************************
+        // COMMENT OUT ABOVE FUNCTION *******************************************************************************
 
         function randomAimAndFire() {
             var d = Math.floor(Math.random() * 3 - 1);
@@ -225,7 +225,7 @@ function AI(playerToControl) {
         }
 
         repeat(randomMove, randomAimAndFire, 250, numRepeats);
-        // SET randomMove 0, internal 0, numRepeats 0 ***************************************************************
+        // REPLACE 'randomMove' with 0, '250' with 0, 'numRepeats' with 0 ********************************************
     }
 
     function moveTowardsBall() {
@@ -237,7 +237,7 @@ function AI(playerToControl) {
         setTimeout(function () {
             currentState = State.FOLLOWING;
         }, 400);
-        // Change from 400 to 100 ***************************************************************************************
+        // Change 400 to 100 *****************************************************************************************
     }
     //Update AI function so it acts according to its state
     function update() {
