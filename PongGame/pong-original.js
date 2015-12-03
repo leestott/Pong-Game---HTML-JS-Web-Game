@@ -69,7 +69,6 @@ var Ball = function () {
             position[1] <= playerPosition[1] + player.getSize()) {
             console.log("Grabbed by player!");
             owner = player;
-            // ADD player.fire(); ***************************************************************************************
         }
 
         // Then the opponent...
@@ -204,7 +203,6 @@ function AI(playerToControl) {
     function aimAndFire() {
         // We'll repeat the motion action 5 to 10 times
         var numRepeats = Math.floor(5 + Math.random() * 5);
-        // COMMENT OUT ABOVE ***************************************************************************************
 
         function randomMove() {
             if (Math.random() > .5) {
@@ -213,7 +211,6 @@ function AI(playerToControl) {
                 ctl.move(distance);
             }
         }
-        // COMMENT OUT ABOVE ***************************************************************************************
 
         function randomAimAndFire() {
             var d = Math.floor(Math.random() * 3 - 1);
@@ -225,7 +222,6 @@ function AI(playerToControl) {
         }
 
         repeat(randomMove, randomAimAndFire, 250, numRepeats);
-        // SET randomMove 0, internal 0, numRepeats 0 ***************************************************************
     }
 
     function moveTowardsBall() {
@@ -237,7 +233,6 @@ function AI(playerToControl) {
         setTimeout(function () {
             currentState = State.FOLLOWING;
         }, 400);
-        // Change from 400 to 100 ***************************************************************************************
     }
     //Update AI function so it acts according to its state
     function update() {
