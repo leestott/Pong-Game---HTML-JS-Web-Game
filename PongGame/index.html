@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Pong Game">
     <meta name="author" content="Microsoft HoC">
 
@@ -32,15 +32,28 @@
             <div id="moveDown" class="sprite control"></div>
         </div>
         <div id="controls-shoot">
-            <div id="shootUp" class="sprite control"></div>
-            <div id="shootDown" class="sprite control"></div>
+            <div id="aimUp" class="sprite control"></div>
+            <div id="aimDown" class="sprite control"></div>
         </div>
     </div>
 
     <!-- JavaScript Scripts -->
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="js/pong.js"></script>
-    <script src="js/hand.js"></script>
+
+    <script type="text/javascript">
+        var player = document.getElementById('player');
+        var moveUp = document.getElementById('moveUp');
+        var moveDown = document.getElementById('moveDown');
+        var aimUp = document.getElementById('aimUp');
+        var aimDown = document.getElementById('aimDown');
+
+        player.addEventListener("touchstart", function () { player.fire(); }, false);
+        moveUp.addEventListener("touchstart", function () { player.move(-distance); }, false);
+        moveDown.addEventListener("touchstart", function () { player.move(distance); }, false);
+        aimUp.addEventListener("touchstart", function () { player.setAim(-1); }, false);
+        aimDown.addEventListener("touchstart", function () { player.setAim(1); }, false);
+    </script>
 
 </body>
 </html>

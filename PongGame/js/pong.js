@@ -69,6 +69,7 @@ var Ball = function () {
             position[1] <= playerPosition[1] + player.getSize()) {
             console.log("Grabbed by player!");
             owner = player;
+            player.fire();
             // ADD player.fire(); ***************************************************************************************
         }
 
@@ -203,17 +204,17 @@ function AI(playerToControl) {
 
     function aimAndFire() {
         // We'll repeat the motion action 5 to 10 times
-        var numRepeats = Math.floor(5 + Math.random() * 5);
+        //var numRepeats = Math.floor(5 + Math.random() * 5);
         // COMMENT OUT ABOVE ***************************************************************************************
 
-        function randomMove() {
-            if (Math.random() > .5) {
-                ctl.move(-distance);
-            } else {
-                ctl.move(distance);
-            }
-        }
-        // COMMENT OUT ABOVE FUNCTION *******************************************************************************
+        //function randomMove() {
+        //    if (Math.random() > .5) {
+        //        ctl.move(-distance);
+        //    } else {
+        //        ctl.move(distance);
+        //    }
+        //}
+        // COMMENT OUT ABOVE ***************************************************************************************
 
         function randomAimAndFire() {
             var d = Math.floor(Math.random() * 3 - 1);
@@ -224,8 +225,8 @@ function AI(playerToControl) {
             currentState = State.FOLLOWING;
         }
 
-        repeat(randomMove, randomAimAndFire, 250, numRepeats);
-        // REPLACE 'randomMove' with 0, '250' with 0, 'numRepeats' with 0 ********************************************
+        repeat(0, randomAimAndFire, 0, 0);
+        // SET randomMove 0, internal 0, numRepeats 0 ***************************************************************
     }
 
     function moveTowardsBall() {
@@ -236,8 +237,8 @@ function AI(playerToControl) {
         }
         setTimeout(function () {
             currentState = State.FOLLOWING;
-        }, 400);
-        // Change 400 to 100 *****************************************************************************************
+        }, 100);
+        // Change from 400 to 100 ***************************************************************************************
     }
     //Update AI function so it acts according to its state
     function update() {
@@ -283,17 +284,19 @@ $(document).ready(function () {
     ball = Ball();
     ai = AI(opponent);
     ball.setOwner(player);
+    requestAnimationFrame(update);
+
     //pointerdown is the universal event for all pointer -- a finger mouse stylus etc
-    //set players aim and fire function
+    //set players move, aim and fire function
 
     $('#moveUp').bind("pointerdown", function () { player.move(-distance); });
     $('#moveDown').bind("pointerdown", function () { player.move(distance); });
-    $('#shootUp').bind("pointerdown", function () { player.setAim(-1); });
-    $('#shootDown').bind("pointerdown", function () { player.setAim(1); });
-    $('#shootUp').bind("pointerup", function () { player.setAim(0); });
-    $('#shootDown').bind("pointerup", function () { player.setAim(0); });
+
+    $('#aimUp').bind("pointerdown", function () { player.setAim(-1); });
+    $('#aimDown').bind("pointerdown", function () { player.setAim(1); });
+
     $('#player').bind("pointerdown", function () { player.fire(); });
-       requestAnimationFrame(update);
+       
 });
 
 $(document).keydown(function (event) {
